@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>A Special Message For You</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(145deg, #FFD1DC, #E6E6FA);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            color: #4A4A4A;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            position: relative;
+            z-index: 10;
+        }
+
+        #welcomeMessage {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        .reveal-btn {
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .reveal-btn:hover {
+            transform: scale(1.1);
+            background-color: #FF1493;
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            text-align: center;
+            max-width: 400px;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        #finalConfession {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            opacity: 0;
+            transition: opacity 2s ease-in-out;
+        }
+
+        #yesButton {
+            background-color: #FF69B4;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #yesButton:hover {
+            transform: scale(1.2);
+            background-color: #FF1493;
+        }
+
+        .heart {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 105, 180, 0.7);
+            transform: rotate(45deg);
+            z-index: 1;
+        }
+
+        #responseMessage {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #FF69B4;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="welcomeMessage">Hey Beautiful ❤️, I have something special to tell you...</h1>
+        
+        <div id="noteButtons">
+            <button class="reveal-btn" onclick="openPopup('popup1')">Click to Reveal First Note</button>
+            <button class="reveal-btn" onclick="openPopup('popup2')">Click for Another Note</button>
+        </div>
+
+        <div id="popup1" class="popup">
+            <button class="close-btn" onclick="closePopup('popup1')">×</button>
+            <p>From the moment I met you, my world became brighter. Your smile lights up my entire universe ✨</p>
+        </div>
+
+        <div id="popup2" class="popup">
+            <button class="close-btn" onclick="closePopup('popup2')">×</button>
+            <p>Every moment with you feels like magic. You're not just my love, but my best friend 💖</p>
+        </div>
+
+        <h2 id="finalConfession">I love you more than words can say ❤️ Will you be mine forever?</h2>
+        
+        <button id="yesButton">Yes!</button>
+        
+        <div id="responseMessage"></div>
+    </div>
+
+    <script>
+        // Fade in welcome message
+        window.addEventListener('load', () => {
+            document.getElementById('welcomeMessage').style.opacity = 1;
+            setTimeout(() => {
+                document.getElementById('finalConfession').style.opacity = 1;
+            }, 3000);
+        });
+
+        // Popup functionality
+        function openPopup(popupId) {
+            document.getElementById(popupId).style.display = 'block';
+        }
+
+        function closePopup(popupId) {
+            document.getElementById(popupId).style.display = 'none';
+        }
+
+        // Floating hearts animation
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.animationDuration = (Math.random() * 5 + 3) + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Create hearts periodically
+        setInterval(createHeart, 300);
+
+        // Yes button interaction
+        document.getElementById('yesButton').addEventListener('click', () => {
+            const responseMessage = document.getElementById('responseMessage');
+            responseMessage.textContent = "Yay! You make me the happiest! ❤️";
+            responseMessage.style.opacity = 1;
+        });
+
+        // Add subtle CSS animation for hearts
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes float {
+                0% { transform: translateY(100vh) rotate(45deg); }
+                100% { transform: translateY(-10vh) rotate(45deg); }
+            }
+            .heart {
+                animation: float linear infinite;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
